@@ -4,9 +4,9 @@ import { Movie } from '../interfaces/movieInterface'
 import { StackScreenProps } from '@react-navigation/stack'
 import { RootStackParams } from '../navigation/Navigation'
 import { ScrollView } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/Ionicons'
 import { useMovieDetails } from '../hooks/useMovieDetails';
 import { Loading } from '../components/Loading';
+import { MovieDetails } from '../components/MovieDetails';
 
 interface Props extends StackScreenProps<RootStackParams, 'DetailScreen'> { // any, any = Params, Route
     movie: Movie
@@ -18,14 +18,6 @@ export const DetailScreen = ({ route }: Props) => {
     const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
     const { isLoading, cast, movieFull } = useMovieDetails(movie.id)
-
-    if (isLoading) {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
-                <Loading />
-            </View>
-        )
-    }
 
     return (
         <ScrollView>
@@ -46,9 +38,9 @@ export const DetailScreen = ({ route }: Props) => {
                 </View>
             </View>
 
-            <View style={styles.marginContainer} >
-                <Icon name="star-outline" color="grey" size={20} />
-            </View>
+
+            {isLoading ? <Loading /> : <MovieDetails movieFull={movieFull!} cast={cast} />}
+
 
         </ScrollView >
 
