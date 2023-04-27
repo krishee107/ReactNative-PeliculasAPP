@@ -18,10 +18,13 @@ export const DetailScreen = ({ route }: Props) => {
     return (
         <ScrollView>
             <View style={styles.imageContainer}>
-                <Image
-                    source={{ uri }}
-                    style={styles.posterImage}
-                />
+                <View style={styles.imageBorder}>
+                    <Image
+                        source={{ uri }}
+                        style={styles.posterImage}
+                    />
+                </View>
+
             </View>
 
             <View>
@@ -49,7 +52,12 @@ const styles = StyleSheet.create({
         elevation: 9,
         borderBottomEndRadius: 25,
         borderBottomStartRadius: 25,
+    },
+    imageBorder: {
+        flex: 1,
         overflow: 'hidden',
+        borderBottomEndRadius: 25,
+        borderBottomStartRadius: 25,
     },
     posterImage: {
         flex: 1,
