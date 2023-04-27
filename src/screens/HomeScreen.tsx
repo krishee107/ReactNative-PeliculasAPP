@@ -11,7 +11,7 @@ import { Dimensions } from 'react-native';
 import { HorizontalSlider } from '../components/HorizontalSlider';
 
 export const HomeScreen = () => {
-    const { peliculasEnCine, peliculasPopulares, peliculasTop, peliculasUpcoming, isLoading } = useMovies();
+    const { nowPlaying, popular, topRated, upcoming, isLoading } = useMovies();
     const { top } = useSafeAreaInsets();
     const { width: windowWidth } = Dimensions.get('window');
 
@@ -30,7 +30,7 @@ export const HomeScreen = () => {
                 {/* Carrousel principal */}
                 <View style={{ height: 440, }} >
                     <Carousel
-                        data={peliculasEnCine}
+                        data={nowPlaying!}
                         renderItem={({ item }: any) => <MoviePoster movie={item} />}
                         sliderWidth={windowWidth}
                         itemWidth={300}
@@ -39,11 +39,11 @@ export const HomeScreen = () => {
                 </View>
 
                 {/* Peliculas populares */}
-                <HorizontalSlider title='Populares' movies={peliculasPopulares} />
+                <HorizontalSlider title='Populares' movies={popular!} />
                 {/* Peliculas top */}
-                <HorizontalSlider title='Top Rated' movies={peliculasTop} />
+                <HorizontalSlider title='Top Rated' movies={topRated!} />
                 {/* Peliculas upcoming */}
-                <HorizontalSlider title='Upcoming' movies={peliculasUpcoming} />
+                <HorizontalSlider title='Upcoming' movies={upcoming!} />
 
             </View>
         </ScrollView>
