@@ -4,6 +4,7 @@ import { Movie } from '../interfaces/movieInterface'
 import { StackScreenProps } from '@react-navigation/stack'
 import { RootStackParams } from '../navigation/Navigation'
 import { ScrollView } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/Ionicons'
 
 interface Props extends StackScreenProps<RootStackParams, 'DetailScreen'> { // any, any = Params, Route
     movie: Movie
@@ -33,6 +34,11 @@ export const DetailScreen = ({ route }: Props) => {
                     <Text style={styles.title} >{movie.title}</Text>
                 </View>
             </View>
+
+            <View style={styles.marginContainer} >
+                <Icon name="star-outline" color="grey" size={20} />
+            </View>
+
         </ScrollView >
 
     )
