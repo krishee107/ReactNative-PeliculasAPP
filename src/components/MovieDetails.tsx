@@ -4,6 +4,7 @@ import { Text, View, Image, StyleSheet, Dimensions } from 'react-native';
 import { MovieFull } from '../interfaces/movieInterface';
 import { Cast } from '../interfaces/creditsInterface';
 import Icon from 'react-native-vector-icons/Ionicons'
+import { CastItem } from './CastItem';
 
 interface Props {
     movie: MovieFull,
@@ -15,7 +16,12 @@ export const MovieDetails = ({ movieFull, cast }: Props) => {
         <>
             {/* Detalles */}
             <View style={{ marginHorizontal: 20 }}>
-                <View style={{ flexDirection: `row` }}>
+                <View
+                    style={{
+                        flexDirection: `row`,
+                        alignItems: `center`,
+                    }}
+                >
                     <Icon
                         name="star-outline"
                         color="grey"
@@ -36,12 +42,33 @@ export const MovieDetails = ({ movieFull, cast }: Props) => {
                 </View>
 
                 {/* Historia */}
-                <Text style={styles.title}>Historia</Text>
-                <Text style={styles.overview}>{movieFull.overview}</Text>
+                <View>
+                    <Text style={styles.title}>Historia</Text>
+                    <Text style={styles.overview}>{movieFull.overview}</Text>
+                </View>
 
                 {/* Presupuesto */}
-                <Text style={styles.title}>Presupuesto</Text>
-                <Text style={{ fontSize: 18 }}>{currencyFormatter.format(movieFull.budget, { code: 'USD' })}</Text>
+                <View
+                    style={{
+                        marginTop: 10,
+                        marginBottom: 20,
+                    }}
+                >
+                    <Text style={styles.title}>Presupuesto</Text>
+                    <Text style={styles.overview}>{currencyFormatter.format(movieFull.budget, { code: 'USD' })}</Text>
+                </View>
+
+                {/* Casting */}
+                <View
+                    style={{
+                        marginTop: 10,
+                        marginBottom: 100,
+                    }}
+                >
+                    <Text style={styles.title}>Actores</Text>
+                    <CastItem actor={cast[0]} />
+                </View>
+
             </View>
         </>
     )
