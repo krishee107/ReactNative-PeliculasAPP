@@ -1,12 +1,14 @@
 import React from 'react'
+import Icon from 'react-native-vector-icons/Ionicons'
 import { Text, View, Image, StyleSheet, Dimensions } from 'react-native';
 import { Movie } from '../interfaces/movieInterface'
 import { StackScreenProps } from '@react-navigation/stack'
 import { RootStackParams } from '../navigation/Navigation'
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { useMovieDetails } from '../hooks/useMovieDetails';
 import { Loading } from '../components/Loading';
 import { MovieDetails } from '../components/MovieDetails';
+import { useNavigation } from '@react-navigation/native';
 
 interface Props extends StackScreenProps<RootStackParams, 'DetailScreen'> { // any, any = Params, Route
     movie: Movie
@@ -18,6 +20,8 @@ export const DetailScreen = ({ route }: Props) => {
     const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
     const { isLoading, cast, movieFull } = useMovieDetails(movie.id)
+
+    const navigation = useNavigation();
 
     return (
         <ScrollView>
@@ -40,6 +44,18 @@ export const DetailScreen = ({ route }: Props) => {
 
 
             {isLoading ? <Loading /> : <MovieDetails movieFull={movieFull!} cast={cast} />}
+
+            {/* Botton para cerrar */}
+            <View style={styles.backButton}>
+                <TouchableOpacity onPress={() => navigation.pop()}>
+                    <Icon
+                        color='white'
+                        name='arrow-back-outline'
+                        size={60}
+                    />
+                </TouchableOpacity>
+            </View>
+
 
 
         </ScrollView >
@@ -82,5 +98,12 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontWeight: 'bold',
+    },
+    backButton: {
+        position: 'absolute',
+        zIndex: 999,
+        elevation: 9,
+        top: 30,
+        left: 5,
     }
 })
