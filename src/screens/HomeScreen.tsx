@@ -1,17 +1,19 @@
 
-import React, { useEffect } from 'react'
-import { Text, View } from 'react-native'
-import movieDB from '../api/movieDB'
+import React from 'react'
+import { ActivityIndicator, Text, View } from 'react-native'
+import { useMovies } from '../hooks/useMovies'
+import { Loading } from '../components/Loading';
 
 export const HomeScreen = () => {
-    //https://api.themoviedb.org/3/movie/now_playing?api_key=94376f04c6d275c4241ffcb07d651fc4&language=es-ES&page=1
-    useEffect(() => {
-        movieDB.get('/now_playing')
-            .then(resp => {
-                console.log(resp.data)
-            })
-    }, [])
+    const { peliculasEnCine, isLoading } = useMovies();
 
+    if (isLoading) {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
+                <Loading />
+            </View>
+        )
+    }
 
 
     return (
