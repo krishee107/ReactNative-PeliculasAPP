@@ -31,4 +31,7 @@ export interface Movie {
 export enum OriginalLanguage {
     En = "en",
     Es = "es",
+    Ja = "ja",
+    Ko = "ko",
+
 }
