@@ -8,9 +8,10 @@ import { useMovies } from '../hooks/useMovies'
 import { Loading } from '../components/Loading';
 import { MoviePoster } from '../components/MoviePoster';
 import { Dimensions } from 'react-native';
+import { HorizontalSlider } from '../components/HorizontalSlider';
 
 export const HomeScreen = () => {
-    const { peliculasEnCine, isLoading } = useMovies();
+    const { peliculasEnCine, peliculasPopulares, peliculasTop, peliculasUpcoming, isLoading } = useMovies();
     const { top } = useSafeAreaInsets();
     const { width: windowWidth } = Dimensions.get('window');
 
@@ -33,26 +34,16 @@ export const HomeScreen = () => {
                         renderItem={({ item }: any) => <MoviePoster movie={item} />}
                         sliderWidth={windowWidth}
                         itemWidth={300}
+                        inactiveSlideOpacity={0.9}
                     />
                 </View>
 
                 {/* Peliculas populares */}
-                <View style={{ backgroundColor: 'red', height: 260 }}>
-                    <Text style={{ fontSize: 30, fontWeight: 'bold', color: 'white', marginHorizontal: 20 }}>
-                        En cine
-                    </Text>
-                    <FlatList
-                        data={peliculasEnCine}
-                        renderItem={({ item }: any) => (
-                            <MoviePoster movie={item} height={200} width={140} />
-                        )}
-                        keyExtractor={(item) => item.id.toString()}
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={false}
-                    >
-
-                    </FlatList>
-                </View>
+                <HorizontalSlider title='Populares' movies={peliculasPopulares} />
+                {/* Peliculas top */}
+                <HorizontalSlider title='Top Rated' movies={peliculasTop} />
+                {/* Peliculas upcoming */}
+                <HorizontalSlider title='Upcoming' movies={peliculasUpcoming} />
 
             </View>
         </ScrollView>
