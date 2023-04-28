@@ -9,6 +9,7 @@ import { Loading } from '../components/Loading';
 import { MoviePoster } from '../components/MoviePoster';
 import { Dimensions } from 'react-native';
 import { HorizontalSlider } from '../components/HorizontalSlider';
+import { GradientBackground } from '../components/GradientBackground';
 
 export const HomeScreen = () => {
     const { nowPlaying, popular, topRated, upcoming, isLoading } = useMovies();
@@ -25,28 +26,31 @@ export const HomeScreen = () => {
 
 
     return (
-        <ScrollView>
-            <View style={{ marginTop: top + 20 }}>
-                {/* Carrousel principal */}
-                <View style={{ height: 440, }} >
-                    <Carousel
-                        data={nowPlaying!}
-                        renderItem={({ item }: any) => <MoviePoster movie={item} />}
-                        sliderWidth={windowWidth}
-                        itemWidth={300}
-                        inactiveSlideOpacity={0.9}
-                    />
+        <GradientBackground>
+            <ScrollView>
+                <View style={{ marginTop: top + 20 }}>
+                    {/* Carrousel principal */}
+                    <View style={{ height: 440, }} >
+                        <Carousel
+                            data={nowPlaying!}
+                            renderItem={({ item }: any) => <MoviePoster movie={item} />}
+                            sliderWidth={windowWidth}
+                            itemWidth={300}
+                            inactiveSlideOpacity={0.9}
+                        />
+                    </View>
+
+                    {/* Peliculas populares */}
+                    <HorizontalSlider title='Populares' movies={popular!} />
+                    {/* Peliculas top */}
+                    <HorizontalSlider title='Top Rated' movies={topRated!} />
+                    {/* Peliculas upcoming */}
+                    <HorizontalSlider title='Upcoming' movies={upcoming!} />
+
                 </View>
+            </ScrollView>
+        </GradientBackground>
 
-                {/* Peliculas populares */}
-                <HorizontalSlider title='Populares' movies={popular!} />
-                {/* Peliculas top */}
-                <HorizontalSlider title='Top Rated' movies={topRated!} />
-                {/* Peliculas upcoming */}
-                <HorizontalSlider title='Upcoming' movies={upcoming!} />
-
-            </View>
-        </ScrollView>
 
     )
 }
