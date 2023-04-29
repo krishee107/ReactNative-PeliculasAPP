@@ -1,5 +1,5 @@
 
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { FlatList, ScrollView, Text, View } from 'react-native'
 import Carousel from 'react-native-snap-carousel';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -17,8 +17,13 @@ export const HomeScreen = () => {
     const { nowPlaying, popular, topRated, upcoming, isLoading } = useMovies();
     const { top } = useSafeAreaInsets();
     const { width: windowWidth } = Dimensions.get('window');
-
     const { setMainColors } = useContext(GradientContext);
+
+    useEffect(() => {
+        if (nowPlaying.length > 0) {
+            getPosterColors(0);
+        }
+    }, [nowPlaying])
 
     const getPosterColors = async (index: number) => {
         const movie = nowPlaying![index];
