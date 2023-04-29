@@ -14,7 +14,7 @@ export const GradientBackground = ({ children }: Props) => {
     useEffect(() => {
         fadeIn(() => {
             setPrevMainColors(colors);
-            fadeOut();
+            fadeOut(0);
         });
     }, [colors])
 
@@ -50,7 +50,3 @@ export const GradientBackground = ({ children }: Props) => {
         </View >
     )
 }
-function setPrevMainColors(colors: ImageColors) {
-    throw new Error('Function not implemented.');
-}
-

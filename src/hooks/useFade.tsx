@@ -14,12 +14,12 @@ export default function useFade() {
         ).start(() => callback ? callback() : null);
     }
 
-    const fadeOut = () => {
+    const fadeOut = (duration = 300) => {
         Animated.timing( // No es recomendable usar Animated.timing para animaciones complejas o que requieran de interacción del usuario
             opacity,
             {
                 toValue: 0, // Valor al que llegará
-                duration: 300, // Duración de la animación
+                duration, // Duración de la animación
                 useNativeDriver: true, // Mejora el rendimiento de la animación
             }
         ).start();
